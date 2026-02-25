@@ -1,40 +1,27 @@
 package com.example.demoapi.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "usuarios")
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nombre;
 
+    @Column(nullable = false, unique = true)
     private String email;
 
-    // Constructor vacío (OBLIGATORIO para JPA)
-    public Usuario() {
-    }
+    private String password;
 
-    // Constructor sin id (para crear nuevos usuarios)
-    public Usuario(String nombre, String email) {
-        this.nombre = nombre;
-        this.email = email;
-    }
+    // constructor vacío (OBLIGATORIO para JPA)
+    public Usuario() {}
 
-    // Constructor completo
-    public Usuario(Long id, String nombre, String email) {
-        this.id = id;
-        this.nombre = nombre;
-        this.email = email;
-    }
-
-    // GETTERS Y SETTERS
-
+    // getters y setters
     public Long getId() {
         return id;
     }
@@ -59,13 +46,11 @@ public class Usuario {
         this.email = email;
     }
 
-    // Método toString (útil para debug)
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public String getPassword() {
+        return password;
     }
-} 
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}

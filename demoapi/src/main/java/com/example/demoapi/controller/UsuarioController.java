@@ -1,64 +1,46 @@
 package com.example.demoapi.controller;
 
 import com.example.demoapi.model.Usuario;
+import com.example.demoapi.service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-    private List<Usuario> listaUsuarios = new ArrayList<>();
-    private Long contadorId = 1L;
+    private final UsuarioService usuarioService;
 
-    //GET - Listar todos
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
+
     @GetMapping
     public List<Usuario> listarUsuarios() {
-        return listaUsuarios;
+        return usuarioService.listarUsuarios();
     }
 
-    //GET - Buscar por ID
     @GetMapping("/{id}")
-    public Usuario obtenerPorId(@PathVariable Long id) {
-        return listaUsuarios.stream()
-                .filter(u -> u.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+    public Usuario obtenerUsuario(@PathVariable Long id) {
+        return usuarioService.obtenerUsuarioPorId(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }
 
-    //POST - Crear usuario
     @PostMapping
     public Usuario crearUsuario(@RequestBody Usuario usuario) {
-        usuario.setId(contadorId++);
-        listaUsuarios.add(usuario);
-        return usuario;
+        return usuarioService.crearUsuario(usuario);
     }
 
-    // PUT - Actualizar usuario
     @PutMapping("/{id}")
-    public Usuario actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuarioActualizado) {
-
-        Optional<Usuario> usuarioOptional = listaUsuarios.stream()
-                .filter(u -> u.getId().equals(id))
-                .findFirst();
-
-        if (usuarioOptional.isPresent()) {
-            Usuario usuario = usuarioOptional.get();
-            usuario.setNombre(usuarioActualizado.getNombre());
-            usuario.setEmail(usuarioActualizado.getEmail());
-            return usuario;
-        }
-
-        return null;
+    public Usuario actualizarUsuario(
+            @PathVariable Long id,
+            @RequestBody Usuario usuario) {
+        return usuarioService.actualizarUsuario(id, usuario);
     }
 
-    // DELETE - Eliminar usuario
     @DeleteMapping("/{id}")
-    public String eliminarUsuario(@PathVariable Long id) {
-        listaUsuarios.removeIf(u -> u.getId().equals(id));
-        return "Usuario eliminado correctamente";
+    public void eliminarUsuario(@PathVariable Long id) {
+        usuarioService.eliminarUsuario(id);
     }
 }

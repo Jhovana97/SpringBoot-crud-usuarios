@@ -30,7 +30,7 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-
+<!-- JPA -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -51,6 +51,12 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<!-- MySQL Driver -->
+	<dependency>
+		<groupId>com.mysql</groupId>
+		<artifactId>mysql-connector-j</artifactId>
+		<scope>runtime</scope>
+	</dependency>
 
 	<build>
 		<plugins>
