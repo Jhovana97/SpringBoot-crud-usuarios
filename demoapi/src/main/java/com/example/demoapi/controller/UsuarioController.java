@@ -1,7 +1,7 @@
 package com.example.demoapi.controller;
 
 import com.example.demoapi.model.Usuario;
-import com.example.demoapi.service.UsuarioService;
+import com.example.demoapi.Service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

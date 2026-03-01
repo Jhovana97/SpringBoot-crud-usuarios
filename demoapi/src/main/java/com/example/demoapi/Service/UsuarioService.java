@@ -37,7 +37,6 @@ public class UsuarioService {
                 .map(usuario -> {
                     usuario.setNombre(usuarioActualizado.getNombre());
                     usuario.setEmail(usuarioActualizado.getEmail());
-                    usuario.setEdad(usuarioActualizado.getEdad());
                     return usuarioRepository.save(usuario);
                 })
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
