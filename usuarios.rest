@@ -17,6 +17,16 @@ Content-Type: application/json
 ### por ID
 GET http://localhost:8080/usuarios/1
 
+
+###
+POST http://localhost:8080/usuarios
+Content-Type: application/json
+{
+  "nombre": "Ana",
+  "edad": 22,
+  "email": "ana@gmail.com"
+}
+###
 ### actualizar
 PUT http://localhost:8080/usuarios/1
 Content-Type: application/json

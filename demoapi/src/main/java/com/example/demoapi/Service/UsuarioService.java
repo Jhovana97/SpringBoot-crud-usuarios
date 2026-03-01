@@ -5,7 +5,6 @@ import com.example.demoapi.Repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -22,8 +21,9 @@ public class UsuarioService {
     }
 
     // GET por ID
-    public Optional<Usuario> obtenerUsuarioPorId(Long id) {
-        return usuarioRepository.findById(id);
+    public Usuario obtenerUsuarioPorId(Long id) {
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + id));
     }
 
     // POST - crear
@@ -37,13 +37,17 @@ public class UsuarioService {
                 .map(usuario -> {
                     usuario.setNombre(usuarioActualizado.getNombre());
                     usuario.setEmail(usuarioActualizado.getEmail());
+                    //usuario.setEdad(usuarioActualizado.getEdad()); // por si tienes edad
                     return usuarioRepository.save(usuario);
                 })
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + id));
     }
 
     // DELETE
     public void eliminarUsuario(Long id) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new RuntimeException("Usuario no encontrado con id: " + id);
+        }
         usuarioRepository.deleteById(id);
     }
 }
