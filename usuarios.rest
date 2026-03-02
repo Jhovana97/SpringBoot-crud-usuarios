@@ -11,21 +11,13 @@ POST http://localhost:8080/usuarios
 Content-Type: application/json
 
 {
-  "nombre": "Jhovana",
-  "edad": 23,
-  "email": "jhovana@gmail.com"
-}
-
-
-###
-POST http://localhost:8080/usuarios
-Content-Type: application/json
-{
-  "nombre": "Ana",
+  "nombre": "willy",
   "edad": 22,
-  "email": "ana@gmail.com"
+  "email": "willy@gmail.com"
 }
+
 ###
+
 ### actualizar
 PUT http://localhost:8080/usuarios/1
 Content-Type: application/json
@@ -34,6 +26,13 @@ Content-Type: application/json
   "nombre": "Ana Actualizada",
   "email": "nuevo@mail.com"
 }
+###
+// Este ejemplo tiene datos de entrada inválidos para probar la validación
+{
+  "nombre": "",
+  "email": "correo-malo",
+  "password": "123"
+}
 
 ###gt eliminar
-DELETE http://localhost:8080/usuarios/2
+DELETE http://localhost:8080/usuarios/3
