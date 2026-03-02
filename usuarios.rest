@@ -6,16 +6,15 @@ GET http://localhost:8080/usuarios/1
 
 ###
 ## 
+### Crear usuario
 POST http://localhost:8080/usuarios
 Content-Type: application/json
 
 {
-  "nombre": "Ana",
-  "email": "ana@mail.com"
+  "nombre": "Jhovana",
+  "edad": 23,
+  "email": "jhovana@gmail.com"
 }
-
-### por ID
-GET http://localhost:8080/usuarios/1
 
 
 ###
@@ -37,4 +36,4 @@ Content-Type: application/json
 }
 
 ###gt eliminar
-DELETE http://localhost:8080/usuarios/1
+DELETE http://localhost:8080/usuarios/2

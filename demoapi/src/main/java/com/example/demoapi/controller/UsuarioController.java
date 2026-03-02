@@ -4,6 +4,8 @@ import com.example.demoapi.model.Usuario;
 import com.example.demoapi.Service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.http.ResponseEntity;
+
 import java.util.List;
 
 @RestController
@@ -23,8 +25,7 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     public Usuario obtenerUsuario(@PathVariable Long id) {
-        return usuarioService.obtenerUsuarioPorId(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return usuarioService.obtenerUsuarioPorId(id);
     }
 
     @PostMapping
@@ -40,7 +41,14 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public void eliminarUsuario(@PathVariable Long id) {
+    public ResponseEntity<?> eliminarUsuario(@PathVariable Long id) {
         usuarioService.eliminarUsuario(id);
+
+        return ResponseEntity.ok().body(
+                java.util.Map.of(
+                        "mensaje", "Usuario eliminado correctamente",
+                        "status", 200
+                )
+        );
     }
 }
