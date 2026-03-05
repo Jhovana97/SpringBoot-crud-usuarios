@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+//ESte import es para configurar la seguridad de Spring, permitiendo definir reglas de acceso y autenticación para las rutas de la aplicación
+import org.springframework.http.HttpMethod;
 
 @Configuration
 public class SecurityConfig {
