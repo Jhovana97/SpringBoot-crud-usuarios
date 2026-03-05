@@ -11,9 +11,9 @@ POST http://localhost:8080/usuarios
 Content-Type: application/json
 
 {
-  "nombre": "willy",
-  "edad": 22,
-  "email": "willy@gmail.com"
+  "nombre": "lucia",
+  "email": "wilucillys@gmail.com",
+  "password": "01234"
 }
 
 ###
