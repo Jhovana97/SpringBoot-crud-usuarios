@@ -77,6 +77,7 @@
 		</dependency>
 
 		<!-- JWT -->
+		<!--esto es para generar y validar tokens JWT json web tokens-->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
