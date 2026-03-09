@@ -1,5 +1,5 @@
 ###
- http://localhost:8080/login
+http://localhost:8080/login
 Content-Type: application/json
 
 
@@ -11,7 +11,7 @@ GET http://localhost:8080/usuarios/1
 ###
 ## 
 ### Crear usuario
-POST http://localhost:8080/usuarios
+POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
@@ -40,3 +40,35 @@ Content-Type: application/json
 
 ###gt eliminar
 DELETE http://localhost:8080/usuarios/3
+
+###
+POST /auth/login
+Content-Type: application/json
+{
+  "email": "usuario@gmail.com",
+  "password": "123456"
+}
+
+###
+
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario@email.com",
+  "password": "123456"
+}
+
+###
+### LOGIN
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@email.com",
+  "password": "123456"
+}
+
+### GET usuarios con token
+GET http://localhost:8080/usuarios
+Authorization: Bearer TU_TOKEN_AQUI
