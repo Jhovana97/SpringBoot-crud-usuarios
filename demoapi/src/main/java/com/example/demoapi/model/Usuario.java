@@ -2,6 +2,7 @@ package com.example.demoapi.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;// para no mostrar la contraseña en las respuestas JSON
 
 @Entity
 @Table(name = "usuarios")
@@ -23,7 +24,9 @@ public class Usuario {
 
     @NotBlank(message = "La contraseña es obligatoria")
     @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
-    private String password;
+    @JsonIgnore // para no mostrar la contraseña en las respuestas JSON
+    @Column(nullable = false)
+    private String password;// en un proyecto real, la contraseña debería estar hasheada, no almacenada en texto plano
 
     // constructor vacío (OBLIGATORIO para JPA)
     public Usuario() {}

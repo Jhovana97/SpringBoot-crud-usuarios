@@ -1,6 +1,7 @@
 package com.example.demoapi.Config;
 
 import com.example.demoapi.Service.JwtService;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,10 +9,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
-//este import es para usar el filtro de autenticación de Spring Security, pero no lo estamos usando en este ejemplo
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.IOException;
+import java.util.Collections;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
@@ -33,7 +36,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             System.out.println("Token recibido: " + token);
 
-            // aquí luego validaremos el token
+            // validar token
+            String username = jwtService.extractUsername(token);
+
+            if (username != null) {
+
+                UsernamePasswordAuthenticationToken authentication =
+                        new UsernamePasswordAuthenticationToken(
+                                username,
+                                null,
+                                Collections.emptyList()
+                        );
+
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
         }
 
         filterChain.doFilter(request, response);

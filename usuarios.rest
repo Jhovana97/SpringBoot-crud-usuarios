@@ -72,3 +72,18 @@ Content-Type: application/json
 ### GET usuarios con token
 GET http://localhost:8080/usuarios
 Authorization: Bearer TU_TOKEN_AQUI
+
+###
+###
+### LOGIN
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario@email.com",
+  "password": "123"
+}
+
+### USAR TOKEN
+GET http://localhost:8080/usuarios
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmlvQGVtYWlsLmNvbSIsImlhdCI6MTc3MzA4MzcyOSwiZXhwIjoxNzczMTcwMTI5fQ.UAHODZDEIlKrkqNgdzfMgIe6f1yQneOlnln3CCxImeE

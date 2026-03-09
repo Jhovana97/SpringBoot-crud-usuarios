@@ -1,6 +1,9 @@
 package com.example.demoapi.controller;
 
 import com.example.demoapi.Service.JwtService;
+import com.example.demoapi.dto.LoginRequest;
+import com.example.demoapi.dto.JwtAuthResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +15,10 @@ public class AuthController {
     private JwtService jwtService;
 
     @PostMapping("/login")
-    public String login(@RequestParam String username) {
+    public JwtAuthResponse login(@RequestBody LoginRequest request) {
 
-        return jwtService.generateToken(username);
+        String token = jwtService.generateToken(request.getEmail());
+
+        return new JwtAuthResponse(token);
     }
 }
